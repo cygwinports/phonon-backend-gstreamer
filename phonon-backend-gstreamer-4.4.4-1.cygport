@@ -1,0 +1,5 @@
+inherit kde4
+
+DESCRIPTION="Qt4/KDE4 multimedia layer with support for multiple backends"
+
+SRC_URI="mirror://kde/stable/phonon/${PN}/${PV}/src/${P}.tar.bz2"
