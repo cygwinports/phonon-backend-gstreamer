@@ -1,0 +1,13 @@
+Phonon uses -ansi but strdup is not ANSI C.
+
+--- origsrc/phonon-backend-gstreamer-4.5.1/gstreamer/plugininstaller.cpp	2011-05-03 23:34:54.000000000 -0500
++++ src/phonon-backend-gstreamer-4.5.1/gstreamer/plugininstaller.cpp	2011-06-07 01:13:03.696660600 -0500
+@@ -29,6 +29,8 @@
+ #include <gst/pbutils/pbutils.h>
+ #endif
+ 
++extern "C" char * strdup (const char *);
++
+ QT_BEGIN_NAMESPACE
+ 
+ namespace Phonon
