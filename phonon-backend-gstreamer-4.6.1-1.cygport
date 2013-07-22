@@ -1,3 +1,0 @@
-inherit kde4
-
-DESCRIPTION="Qt4/KDE4 multimedia layer GStreamer backend"
