@@ -8,3 +8,9 @@ SUMMARY="Qt4 multimedia abstraction layer (GStreamer backend)"
 DESCRIPTION="Qt4/KDE4 multimedia engine with support for multiple backends"
 
 SRC_URI="mirror://kde/stable/phonon/${NAME}/${VERSION}/${NAME}-${VERSION}.tar.xz"
+
+PKG_NAMES="${NAME} ${NAME}-common"
+phonon_backend_gstreamer_REQUIRES="${NAME}-common"
+phonon_backend_gstreamer_CONTENTS="usr/lib/kde4/ usr/share/doc/ usr/share/kde4/"
+phonon_backend_gstreamer_common_SUMMARY="Qt multimedia abstraction layer (GStreamer backend icons)"
+phonon_backend_gstreamer_common_CONTENTS="etc/postinstall/ usr/share/icons/"
