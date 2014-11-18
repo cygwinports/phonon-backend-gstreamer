@@ -1,8 +1,10 @@
 inherit kde4
 
 NAME="phonon-backend-gstreamer"
-VERSION=4.7.2
+VERSION=4.8.0
 RELEASE=1
 CATEGORY="KDE"
 SUMMARY="Qt4 multimedia abstraction layer (GStreamer backend)"
 DESCRIPTION="Qt4/KDE4 multimedia engine with support for multiple backends"
+
+SRC_URI="mirror://kde/stable/phonon/${NAME}/${VERSION}/${NAME}-${VERSION}.tar.xz"
