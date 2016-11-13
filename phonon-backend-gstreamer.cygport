@@ -1,16 +1,50 @@
-inherit kde4
+inherit kde4 qt5
 
 NAME="phonon-backend-gstreamer"
-VERSION=4.8.2
+VERSION=4.9.0
 RELEASE=1
 CATEGORY="KDE"
-SUMMARY="Qt4 multimedia abstraction layer (GStreamer backend)"
+SUMMARY="Qt multimedia abstraction layer (GStreamer backend)"
 DESCRIPTION="Qt4/KDE4 multimedia engine with support for multiple backends"
 
-SRC_URI="mirror://kde/stable/phonon/${NAME}/${VERSION}/src/${NAME}-${VERSION}.tar.xz"
+SRC_URI="mirror://kde/stable/phonon/${NAME}/${VERSION}/${NAME}-${VERSION}.tar.xz"
+SRC_DIR="phonon-gstreamer-${VERSION}"
+PATCH_URI="4.9.0-cygwin-ftm.patch"
 
-PKG_NAMES="${NAME} ${NAME}-common"
+PKG_NAMES="${NAME} ${NAME}-common phonon4qt5-backend-gstreamer"
 phonon_backend_gstreamer_REQUIRES="${NAME}-common"
-phonon_backend_gstreamer_CONTENTS="usr/lib/kde4/ usr/share/doc/ usr/share/kde4/"
+phonon_backend_gstreamer_SUMMARY=${SUMMARY/ /4 }
+phonon_backend_gstreamer_CONTENTS="
+	usr/lib/kde4/plugins/phonon_backend/phonon_gstreamer.dll
+	usr/share/kde4/services/phononbackends/gstreamer.desktop
+"
 phonon_backend_gstreamer_common_SUMMARY="Qt multimedia abstraction layer (GStreamer backend icons)"
-phonon_backend_gstreamer_common_CONTENTS="etc/postinstall/ usr/share/icons/"
+phonon_backend_gstreamer_common_CONTENTS="
+	etc/postinstall/
+	usr/share/doc/
+	usr/share/icons/hicolor/*/apps/phonon-gstreamer.*
+"
+phonon4qt5_backend_gstreamer_REQUIRES="${NAME}-common"
+phonon4qt5_backend_gstreamer_SUMMARY=${SUMMARY/ /5 }
+phonon4qt5_backend_gstreamer_CONTENTS="
+	${QT5_PLUGINSDIR#/}/phonon4qt5_backend/phonon_gstreamer.dll
+"
+phonon_backend_gstreamer_debuginfo_OBSOLETES="phonon4qt5-backend-gstreamer-debuginfo"
+
+src_compile() {
+	mkdir -p ${B}/qt{4,5}
+
+	cd ${B}/qt4
+	kde4_compile
+
+	cd ${B}/qt5
+	cygcmake -DPHONON_BUILD_PHONON4QT5=ON -D__KDE_HAVE_GCC_VISIBILITY=OFF
+	cygmake
+}
+
+src_install() {
+	cd ${B}/qt4
+	cyginstall
+	cd ${B}/qt5
+	cyginstall
+}
