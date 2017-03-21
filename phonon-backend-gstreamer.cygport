@@ -2,14 +2,17 @@ inherit kde4 qt5
 
 NAME="phonon-backend-gstreamer"
 VERSION=4.9.0
-RELEASE=1
+RELEASE=2
 CATEGORY="KDE"
 SUMMARY="Qt multimedia abstraction layer (GStreamer backend)"
 DESCRIPTION="Qt4/KDE4 multimedia engine with support for multiple backends"
 
 SRC_URI="mirror://kde/stable/phonon/${NAME}/${VERSION}/${NAME}-${VERSION}.tar.xz"
 SRC_DIR="phonon-gstreamer-${VERSION}"
-PATCH_URI="4.9.0-cygwin-ftm.patch"
+PATCH_URI="
+	4.9.0-cygwin-ftm.patch
+	4.9.0-mp3-plugins.patch
+"
 
 PKG_NAMES="${NAME} ${NAME}-common phonon4qt5-backend-gstreamer"
 phonon_backend_gstreamer_REQUIRES="${NAME}-common"

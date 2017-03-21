@@ -1,0 +1,13 @@
+mad is being removed from GStreamer in favour of mpg123
+
+--- origsrc/phonon-gstreamer-4.9.0/gstreamer/backend.cpp	2016-04-17 23:25:19.000000000 -0500
++++ src/phonon-gstreamer-4.9.0/gstreamer/backend.cpp	2017-03-20 11:50:39.960954100 -0500
+@@ -251,6 +251,8 @@ QStringList Backend::availableMimeTypes(
+     // Add mp3 as a separate mime type as people are likely to look for it.
+     if ((mpegFactory = gst_element_factory_find("ffmpeg")) ||
+         (mpegFactory = gst_element_factory_find("mad")) ||
++        (mpegFactory = gst_element_factory_find("acmmp3dec")) ||
++        (mpegFactory = gst_element_factory_find("mpg123audiodec")) ||
+         (mpegFactory = gst_element_factory_find("flump3dec"))) {
+           availableMimeTypes << QLatin1String("audio/x-mp3");
+           availableMimeTypes << QLatin1String("audio/x-ape");// ape is available from ffmpeg
